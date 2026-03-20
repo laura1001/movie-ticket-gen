@@ -497,7 +497,15 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-8">
+    <div className="min-h-screen p-4 md:p-8 relative">
+      {/* 背景光效 */}
+      <div className="light-orbit">
+        <div className="light-1"></div>
+        <div className="light-2"></div>
+        <div className="light-3"></div>
+        <div className="light-4"></div>
+        <div className="light-5"></div>
+      </div>
       {/* 后台截图容器 */}
       <div id="download-shadow-container" style={{ position: 'absolute', left: '-9999px', top: 0, opacity: 0, overflow: 'visible', width: '400px', height: '750px' }}>
         {/* 正面票根 - 后台截图用 */}
@@ -536,7 +544,7 @@ export default function Home() {
         </div>
       </div>
       
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
           <h1 className="text-6xl font-bold mb-4 tracking-[0.2em] text-[#0F172A] drop-shadow-[2px_2px_0_rgba(0,0,0,0.1)]" style={{ fontFamily: 'AlimamaFangYuanTiVF-Thin-2, sans-serif' }}>电影票根生成器</h1>
           <p className="text-gray-600 text-lg font-semibold tracking-widest uppercase mt-6">定制你的个性化票根，留住每一场精彩</p>
