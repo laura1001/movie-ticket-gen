@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'XiaoShiTou';
+  src: url('/fonts/xiaoshitou.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlimamaFangYuanTiVF-Thin-2';
+  src: url('/fonts/AlimamaFangYuanTiVF-Thin-2.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --foreground-rgb: 30, 41, 59;
+  --background-rgb: 244, 244, 245;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 248, 250, 252;
+    --background-rgb: 30, 41, 59;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: #F4F4F5;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
