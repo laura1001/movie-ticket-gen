@@ -2,15 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Search, Download, Film, Loader2 } from 'lucide-react';
-import { Bebas_Neue } from 'next/font/google';
 import * as htmlToImage from 'html-to-image';
-import html2canvas from 'html2canvas';
-
-const bebasNeue = Bebas_Neue({ 
-  subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal']
-});
 
 interface Movie {
   id: number;
@@ -32,7 +24,6 @@ interface MovieTicketProps {
   time: string;
   backgroundColor: string;
   textColor: string;
-  borderColor: string;
   isFront: boolean;
   isRounded: boolean;
 }
@@ -48,7 +39,6 @@ const MovieTicket: React.FC<MovieTicketProps> = ({
   time,
   backgroundColor,
   textColor,
-  borderColor,
   isFront,
   isRounded,
 }) => {
@@ -214,7 +204,7 @@ export default function Home() {
   const [time, setTime] = useState('');
   const [backgroundColor, setBackgroundColor] = useState('#ffffff');
   const [textColor, setTextColor] = useState('#1e293b');
-  const [borderColor, setBorderColor] = useState('#3b82f6');
+
   const [isFront, setIsFront] = useState(true);
   const [isRounded, setIsRounded] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -386,6 +376,10 @@ export default function Home() {
     setMovie(selectedMovie);
     setSearchResults([]);
     setShowNoMovieMessage(false);
+    // 清空海报列表，确保切换电影时能正确重新加载
+    setPosterList([]);
+    setFrontPosterIndex(0);
+    setBackPosterIndex(0);
     if (selectedMovie.release_date) {
       setTime(selectedMovie.release_date);
     }
@@ -467,8 +461,7 @@ export default function Home() {
       const frontDataUrl = await htmlToImage.toJpeg(shadowFrontTicket, {
         quality: 0.92,
         pixelRatio: 2,
-        backgroundColor: null,
-        useCORS: true
+        backgroundColor: null
       });
       
       // 下载正面
@@ -490,8 +483,7 @@ export default function Home() {
       const backDataUrl = await htmlToImage.toJpeg(shadowBackTicket, {
         quality: 0.92,
         pixelRatio: 2,
-        backgroundColor: null,
-        useCORS: true
+        backgroundColor: null
       });
       
       // 下载反面
@@ -521,7 +513,6 @@ export default function Home() {
             time={time}
             backgroundColor={backgroundColor}
             textColor={textColor}
-            borderColor={borderColor}
             isFront={true}
             isRounded={isRounded}
           />
@@ -539,7 +530,6 @@ export default function Home() {
             time={time}
             backgroundColor={backgroundColor}
             textColor={textColor}
-            borderColor={borderColor}
             isFront={false}
             isRounded={isRounded}
           />
@@ -767,7 +757,6 @@ export default function Home() {
                     time={time}
                     backgroundColor={backgroundColor}
                     textColor={textColor}
-                    borderColor={borderColor}
                     isFront={true}
                     isRounded={isRounded}
                   />
@@ -785,7 +774,6 @@ export default function Home() {
                     time={time}
                     backgroundColor={backgroundColor}
                     textColor={textColor}
-                    borderColor={borderColor}
                     isFront={false}
                     isRounded={isRounded}
                   />
